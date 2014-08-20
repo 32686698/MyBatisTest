@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tian.mybatis.dao.SysUserMapper" >
+  <resultMap id="BaseResultMap" type="com.tian.mybatis.model.SysUser" >
+    <result column="ID" property="id" jdbcType="CHAR" />
+    <result column="TECH_ID" property="techId" jdbcType="CHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="USER_LEVEL" property="userLevel" jdbcType="CHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="TRUE_NAME" property="trueName" jdbcType="VARCHAR" />
+    <result column="OPEN_FLAG" property="openFlag" jdbcType="VARCHAR" />
+    <result column="DEFAULT_MODULE" property="defaultModule" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="DATE" />
+    <result column="CREATE_PNAME" property="createPname" jdbcType="VARCHAR" />
+    <result column="MODIFY_DATE" property="modifyDate" jdbcType="DATE" />
+    <result column="MODIFY_PNAME" property="modifyPname" jdbcType="VARCHAR" />
+    <result column="ORGAN_NAME" property="organName" jdbcType="VARCHAR" />
+    <result column="ORGAN_ID" property="organId" jdbcType="VARCHAR" />
+    <result column="CARD_ID" property="cardId" jdbcType="VARCHAR" />
+    <result column="PHONE_NO" property="phoneNo" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.tian.mybatis.model.SysUser" extends="BaseResultMap" >
+    <result column="SIGNATURE" property="signature" jdbcType="BLOB" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, TECH_ID, USERNAME, USER_LEVEL, PASSWORD, TRUE_NAME, OPEN_FLAG, DEFAULT_MODULE, 
+    REMARK, CREATE_DATE, CREATE_PNAME, MODIFY_DATE, MODIFY_PNAME, ORGAN_NAME, ORGAN_ID, 
+    CARD_ID, PHONE_NO
+  </sql>
+  <sql id="Blob_Column_List" >
+    SIGNATURE
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.tian.mybatis.model.SysUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from XZXT02.SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.tian.mybatis.model.SysUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from XZXT02.SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.tian.mybatis.model.SysUserExample" >
+    delete from XZXT02.SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.tian.mybatis.model.SysUser" >
+    insert into XZXT02.SYS_USER (ID, TECH_ID, USERNAME, 
+      USER_LEVEL, PASSWORD, TRUE_NAME, 
+      OPEN_FLAG, DEFAULT_MODULE, REMARK, 
+      CREATE_DATE, CREATE_PNAME, MODIFY_DATE, 
+      MODIFY_PNAME, ORGAN_NAME, ORGAN_ID, 
+      CARD_ID, PHONE_NO, SIGNATURE
+      )
+    values (#{id,jdbcType=CHAR}, #{techId,jdbcType=CHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userLevel,jdbcType=CHAR}, #{password,jdbcType=VARCHAR}, #{trueName,jdbcType=VARCHAR}, 
+      #{openFlag,jdbcType=VARCHAR}, #{defaultModule,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=DATE}, #{createPname,jdbcType=VARCHAR}, #{modifyDate,jdbcType=DATE}, 
+      #{modifyPname,jdbcType=VARCHAR}, #{organName,jdbcType=VARCHAR}, #{organId,jdbcType=VARCHAR}, 
+      #{cardId,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, #{signature,jdbcType=BLOB}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.tian.mybatis.model.SysUser" >
+    insert into XZXT02.SYS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="techId != null" >
+        TECH_ID,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="userLevel != null" >
+        USER_LEVEL,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="trueName != null" >
+        TRUE_NAME,
+      </if>
+      <if test="openFlag != null" >
+        OPEN_FLAG,
+      </if>
+      <if test="defaultModule != null" >
+        DEFAULT_MODULE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="createPname != null" >
+        CREATE_PNAME,
+      </if>
+      <if test="modifyDate != null" >
+        MODIFY_DATE,
+      </if>
+      <if test="modifyPname != null" >
+        MODIFY_PNAME,
+      </if>
+      <if test="organName != null" >
+        ORGAN_NAME,
+      </if>
+      <if test="organId != null" >
+        ORGAN_ID,
+      </if>
+      <if test="cardId != null" >
+        CARD_ID,
+      </if>
+      <if test="phoneNo != null" >
+        PHONE_NO,
+      </if>
+      <if test="signature != null" >
+        SIGNATURE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="techId != null" >
+        #{techId,jdbcType=CHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userLevel != null" >
+        #{userLevel,jdbcType=CHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="trueName != null" >
+        #{trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="openFlag != null" >
+        #{openFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultModule != null" >
+        #{defaultModule,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=DATE},
+      </if>
+      <if test="createPname != null" >
+        #{createPname,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=DATE},
+      </if>
+      <if test="modifyPname != null" >
+        #{modifyPname,jdbcType=VARCHAR},
+      </if>
+      <if test="organName != null" >
+        #{organName,jdbcType=VARCHAR},
+      </if>
+      <if test="organId != null" >
+        #{organId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null" >
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="signature != null" >
+        #{signature,jdbcType=BLOB},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.tian.mybatis.model.SysUserExample" resultType="java.lang.Integer" >
+    select count(*) from XZXT02.SYS_USER
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update XZXT02.SYS_USER
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.techId != null" >
+        TECH_ID = #{record.techId,jdbcType=CHAR},
+      </if>
+      <if test="record.username != null" >
+        USERNAME = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userLevel != null" >
+        USER_LEVEL = #{record.userLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trueName != null" >
+        TRUE_NAME = #{record.trueName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openFlag != null" >
+        OPEN_FLAG = #{record.openFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.defaultModule != null" >
+        DEFAULT_MODULE = #{record.defaultModule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=DATE},
+      </if>
+      <if test="record.createPname != null" >
+        CREATE_PNAME = #{record.createPname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modifyDate != null" >
+        MODIFY_DATE = #{record.modifyDate,jdbcType=DATE},
+      </if>
+      <if test="record.modifyPname != null" >
+        MODIFY_PNAME = #{record.modifyPname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organName != null" >
+        ORGAN_NAME = #{record.organName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.organId != null" >
+        ORGAN_ID = #{record.organId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardId != null" >
+        CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.phoneNo != null" >
+        PHONE_NO = #{record.phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signature != null" >
+        SIGNATURE = #{record.signature,jdbcType=BLOB},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update XZXT02.SYS_USER
+    set ID = #{record.id,jdbcType=CHAR},
+      TECH_ID = #{record.techId,jdbcType=CHAR},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      USER_LEVEL = #{record.userLevel,jdbcType=CHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      TRUE_NAME = #{record.trueName,jdbcType=VARCHAR},
+      OPEN_FLAG = #{record.openFlag,jdbcType=VARCHAR},
+      DEFAULT_MODULE = #{record.defaultModule,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=DATE},
+      CREATE_PNAME = #{record.createPname,jdbcType=VARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=DATE},
+      MODIFY_PNAME = #{record.modifyPname,jdbcType=VARCHAR},
+      ORGAN_NAME = #{record.organName,jdbcType=VARCHAR},
+      ORGAN_ID = #{record.organId,jdbcType=VARCHAR},
+      CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      PHONE_NO = #{record.phoneNo,jdbcType=VARCHAR},
+      SIGNATURE = #{record.signature,jdbcType=BLOB}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update XZXT02.SYS_USER
+    set ID = #{record.id,jdbcType=CHAR},
+      TECH_ID = #{record.techId,jdbcType=CHAR},
+      USERNAME = #{record.username,jdbcType=VARCHAR},
+      USER_LEVEL = #{record.userLevel,jdbcType=CHAR},
+      PASSWORD = #{record.password,jdbcType=VARCHAR},
+      TRUE_NAME = #{record.trueName,jdbcType=VARCHAR},
+      OPEN_FLAG = #{record.openFlag,jdbcType=VARCHAR},
+      DEFAULT_MODULE = #{record.defaultModule,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=DATE},
+      CREATE_PNAME = #{record.createPname,jdbcType=VARCHAR},
+      MODIFY_DATE = #{record.modifyDate,jdbcType=DATE},
+      MODIFY_PNAME = #{record.modifyPname,jdbcType=VARCHAR},
+      ORGAN_NAME = #{record.organName,jdbcType=VARCHAR},
+      ORGAN_ID = #{record.organId,jdbcType=VARCHAR},
+      CARD_ID = #{record.cardId,jdbcType=VARCHAR},
+      PHONE_NO = #{record.phoneNo,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>
